@@ -14,7 +14,9 @@ export const Home = () => {
           <Link to="preciso-ajuda">
             <Button color="red">PRECISO DE AJUDA</Button>
           </Link>
-          <Button color="yellow">QUERO AJUDAR</Button>
+          <Link to="quero-ajudar">
+            <Button color="yellow">QUERO AJUDAR</Button>
+          </Link>
         </ButtonsContainer>
         <Info>
           Por favor, esteja ciente de que este aplicativo não é uma iniciativa oficial do governo. Foi criado com o
