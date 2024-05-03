@@ -17,6 +17,9 @@ export const Home = () => {
           <Link to="quero-ajudar">
             <Button color="yellow">QUERO AJUDAR</Button>
           </Link>
+          <Link to="pontos-ajuda">
+            <Button color="black">PONTOS DE AJUDA</Button>
+          </Link>
         </ButtonsContainer>
         <Info>
           Por favor, esteja ciente de que este aplicativo não é uma iniciativa oficial do governo. Foi criado com o
