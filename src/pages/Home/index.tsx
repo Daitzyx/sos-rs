@@ -2,6 +2,7 @@ import { ButtonsContainer, Container } from './styles'
 
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
   return (
@@ -10,7 +11,9 @@ export const Home = () => {
 
       <main>
         <ButtonsContainer>
-          <Button color="red">PRECISO DE AJUDA</Button>
+          <Link to="preciso-ajuda">
+            <Button color="red">PRECISO DE AJUDA</Button>
+          </Link>
           <Button color="yellow">QUERO AJUDAR</Button>
         </ButtonsContainer>
       </main>

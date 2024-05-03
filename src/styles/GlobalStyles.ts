@@ -74,12 +74,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${theme.colors.blue800};
+    background-color: ${theme.colors.black};
     border-radius: 5px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: ${theme.colors.blue800};
+    background-color: ${theme.colors.black};
   }
 
   &::-webkit-scrollbar-track {
