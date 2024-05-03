@@ -4,33 +4,16 @@ export const theme = {
     green800: '#30ab2b',
     white: '#FFF',
     white50: '#FCFCFC',
-    white150: '#F7F7F8',
+    gray: '#a9a9a9',
     white100: '#f1f1f1',
-    white200: '#F6F8FA',
-    white250: '#EBEBEB',
-
-    blue300: '#018ebc',
-    blue500: '#00698b',
-    blue600: '#007bff',
-    blue700: '#0060F0',
-    blue750: '#0060f08f',
-    blue800: '#0154cf',
     blue900: '#04409B',
-
-    gray100: '#dadada',
-    gray200: '#cdcdcd',
-    gray300: '#c3c3c3',
-    gray700: '#8D8FA3',
-    gray800: '#6F7188',
-    gray900: '#67646C',
-
-    black50: '#01040A',
-    black100: '#2E313A',
-    black200: '#4F5464',
-
-    came50: '#E2E8F0',
-    came200: '#696F82',
-    came600: '#2E313A'
+    yellow: '#FECC00',
+    yellowLight: '#ffde55',
+    black50: '#303030',
+    black50Light: '#4d4d4d',
+    came: '#E2E8F0',
+    red: '#e31e24',
+    redLight: '#e55b5f'
   },
   fonts: {
     principal: 'Poppins'
