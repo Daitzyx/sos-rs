@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { ref, set, push } from 'firebase/database'
 import { db } from '../../libs/firebase'
+import { useNavigate } from 'react-router-dom'
 
 const useWantHelpHook = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<null | string>(null)
   const [message, setMessage] = useState('')
+
+  const navigate = useNavigate()
 
   const requestAndSaveLocation = async (textareaData?: string) => {
     if (!navigator.geolocation) {
@@ -39,7 +42,8 @@ const useWantHelpHook = () => {
             timestamp
           })
           setLoading(false)
-          setMessage('Localização enviada com sucesso!')
+          navigate('/localizacao-compartilhada')
+
           setError(null)
         } catch (error: any) {
           setError('Failed to save data: ' + error.message)
@@ -79,3 +83,4 @@ const useWantHelpHook = () => {
 }
 
 export default useWantHelpHook
+
