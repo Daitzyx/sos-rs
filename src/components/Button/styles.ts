@@ -40,9 +40,6 @@ const getColor = (colorType: string) => {
 }
 
 export const ButtonContainer = styled.button<ButtonsProps>`
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-
   ${(props) => getColor(props.color)};
 
   display: flex;
@@ -61,7 +58,8 @@ export const ButtonContainer = styled.button<ButtonsProps>`
   font-family: ${theme.fonts.principal};
 
   transition: all 0.6s ease;
-
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   &:hover {
     background-color: ${({ color }) => getColor(color).hoverColor};
 
@@ -71,3 +69,4 @@ export const ButtonContainer = styled.button<ButtonsProps>`
     transition: all 0.5s ease;
   }
 `
+
