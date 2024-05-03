@@ -16,7 +16,8 @@ export const theme = {
     redLight: '#e55b5f'
   },
   fonts: {
-    principal: 'Poppins'
+    principal: 'Montserrat',
+    secondary: 'Poppins'
   },
   fontSize: {
     xs: '10px',

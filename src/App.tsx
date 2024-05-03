@@ -3,6 +3,7 @@ import { AppRoutes } from './routes'
 import { GlobalStyles } from './styles/GlobalStyles'
 import { theme } from './styles/Theme'
 import { BrowserRouter } from 'react-router-dom'
+import { app } from './libs/firebase'
 
 function App() {
   return (
