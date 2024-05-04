@@ -54,7 +54,7 @@ export const HelpLocations = () => {
         })
       : locations
 
-  const { nextPage, prevPage, currentItems } = usePagination(filteredLocations, 4)
+  const { nextPage, prevPage, currentItems } = usePagination(filteredLocations, 10)
 
   return (
     <>
