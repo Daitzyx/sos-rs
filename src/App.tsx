@@ -5,6 +5,13 @@ import { theme } from './styles/Theme'
 import { BrowserRouter } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 
+import { logEvent } from 'firebase/analytics'
+import { analytics } from './libs/firebase'
+
+logEvent(analytics, 'button_click', {
+  item: 'share button'
+})
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,3 +25,4 @@ function App() {
 }
 
 export default App
+
