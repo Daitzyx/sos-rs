@@ -8,9 +8,11 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer, ModalContent } from './styles'
+import { Container, Title, ButtonContainer, PaginateButtons, ModalContent } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
+import { LoadingSpin } from '../../components/LoadingSpin'
+import usePagination from '../../hooks/usePagination'
 
 function calculateTimeSincePublication(timestamp: string) {
   const selectedUserTimestamp = new Date(timestamp)
@@ -36,7 +38,7 @@ export const ProvideHelpLocations = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
-  const { userLocation } = useUserLocation()
+  const { userLocation, loading } = useUserLocation()
 
   const filterUsersByDistance = (distance: any) => {
     setSelectedDistance(distance)
@@ -64,7 +66,7 @@ export const ProvideHelpLocations = () => {
       user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
 
     const { address, observation } = user
-    const addressParts = address.split(',').filter((part) => part.trim() !== 'undefined')
+    const addressParts = address.split(',').filter((part: any) => part.trim() !== 'undefined')
     const formattedAddress = addressParts.join(', ')
     const selectedUserData = {
       address: formattedAddress,
@@ -74,23 +76,8 @@ export const ProvideHelpLocations = () => {
     setSelectedUser(selectedUserData)
   }
 
-  /*   filterUsersByDistance(50) */
+  const { nextPage, prevPage, totalPages } = usePagination(filteredUsers, 10)
 
-  // useEffect(() => {
-  //   if (selectedUser) {
-  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
-  //   }
-  // }, [selectedUser, getAddressFromCoordinates]);
-
-  // }, [])
-
-  // }, [])
-  /* useEffect(() => {
-  }, []) */
-
-  // filterUsersByDistance(50)
-
-  console.log(selectedUser)
   return (
     <>
       <Container>
@@ -102,6 +89,29 @@ export const ProvideHelpLocations = () => {
           {filteredUsers.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
+          {loading && <LoadingSpin />}
+
+          {filteredUsers.length === 0 && (
+            <p style={{ textAlign: 'center', padding: '15px' }}>Nada reportado até o momento!</p>
+          )}
+
+          <PaginateButtons>
+            {filteredUsers.length > 0 && (
+              <Button width="25%" onClick={prevPage}>
+                Anterior
+              </Button>
+            )}
+            {[...Array(totalPages).keys()].map((page) => (
+              <Button width="20%" key={page}>
+                {page + 1}
+              </Button>
+            ))}
+            {filteredUsers.length > 0 && (
+              <Button width="25%" onClick={nextPage}>
+                Próxima
+              </Button>
+            )}
+          </PaginateButtons>
           <ButtonContainer>
             <Button width="100%" color="yellow">
               ATUALIZAR
@@ -131,4 +141,3 @@ export const ProvideHelpLocations = () => {
     </>
   )
 }
-

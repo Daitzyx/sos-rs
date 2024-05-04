@@ -10,7 +10,9 @@ import useFetchHelpLocations from './useFetchLocation'
 import { calculateDistance } from '../../utils/calculate'
 import useUserLocation from '../../hooks/useUserLocation'
 
-import { ButtonContainer, Container, Title, ModalContent } from './styles'
+import { ButtonContainer, Container, Title, ModalContent, CardsContainer, PaginateButtons } from './styles'
+import { LoadingSpin } from '../../components/LoadingSpin'
+import usePagination from '../../hooks/usePagination'
 
 export const HelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
@@ -33,7 +35,7 @@ export const HelpLocations = () => {
   const { locations } = useFetchHelpLocations()
   const [selectedDistance, setSelectedDistance] = useState(null)
   const navigate = useNavigate()
-  const { userLocation } = useUserLocation()
+  const { userLocation, loading } = useUserLocation()
 
   const filterLocationsByDistance = (distance: any) => {
     setSelectedDistance(distance)
@@ -52,6 +54,8 @@ export const HelpLocations = () => {
         })
       : locations
 
+  const { nextPage, prevPage, currentItems, totalPages } = usePagination(filteredLocations, 8)
+
   return (
     <>
       <Container>
@@ -61,9 +65,32 @@ export const HelpLocations = () => {
           <Title>PONTOS DE AJUDA</Title>
           <Distances onSelectDistance={filterLocationsByDistance} />
 
-          {filteredLocations.map((location: any) => (
-            <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
-          ))}
+          <CardsContainer>
+            {currentItems.map((location: any) => (
+              <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
+            ))}
+
+            {loading && <LoadingSpin />}
+          </CardsContainer>
+
+          <PaginateButtons>
+            {locations.length > 0 && (
+              <Button width="25%" onClick={prevPage}>
+                Anterior
+              </Button>
+            )}
+            {[...Array(totalPages).keys()].map((page) => (
+              <Button width="20%" key={page}>
+                {page + 1}
+              </Button>
+            ))}
+            {locations.length > 0 && (
+              <Button width="25%" onClick={nextPage}>
+                Próxima
+              </Button>
+            )}
+          </PaginateButtons>
+
           <ButtonContainer>
             <Button width="100%" color="yellow" onClick={() => navigate('/adicionar-ponto')}>
               Adicionar
@@ -76,6 +103,7 @@ export const HelpLocations = () => {
           </ButtonContainer>
         </main>
       </Container>
+
       <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
@@ -90,4 +118,3 @@ export const HelpLocations = () => {
     </>
   )
 }
-

@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
-
-export const Card = styled.div` 
-  
+export const Card = styled.div`
   box-shadow: 1px 1px 5px black;
   border-radius: 10px;
   display: flex;
@@ -10,7 +8,6 @@ export const Card = styled.div`
   align-items: center;
   padding: 15px;
   gap: 5px;
-
 `
 
 export const MapButton = styled.button`
@@ -18,7 +15,6 @@ export const MapButton = styled.button`
   padding: 3px 15px;
   color: white;
   border-radius: 15px;
-
 `
 
 export const Details = styled.div`
@@ -34,17 +30,17 @@ export const Details = styled.div`
 `
 
 export const Street = styled.p`
-  font-Size: 14px;
+  font-size: 14px;
   font-weight: 700;
 `
 
-export const Distance = styled.p`  
+export const Distance = styled.p`
   font-size: 12px;
   font-weight: 600;
 `
 
-export const Options = styled.button` 
+export const Options = styled.button`
   padding: 2px 5px;
-  
+
   cursor: pointer;
 `
