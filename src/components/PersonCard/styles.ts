@@ -43,3 +43,7 @@ export const Distance = styled.p`
   font-weight: 600;
 
 `
+
+export const Options = styled.button` 
+  padding: 2px 5px;
+`

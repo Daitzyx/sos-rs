@@ -5,7 +5,7 @@ import flagRSIcon from '../../assets/icons/rs-flag.svg'
 export const HeaderAlt = () => {
   return (
     <Container>
-      <img src={flagRSIcon} width={100} alt="Bandeira do Rio Grande do Sul" />
+      <img src={flagRSIcon} width={70} alt="Bandeira do Rio Grande do Sul" />
 
       <Title>
         SOS

@@ -59,10 +59,16 @@ export const ButtonContainer = styled.div`
       text-align: center;
     } 
 
+    h4{
+      overflow-y: auto;
+      max-height: 200px;
+    }
+
     p{
       text-align: center; 
       color: ${theme.colors.red};
       font-weight: ${theme.fontWeight.bold};
+      font-style: italic;
     }
 
     button{

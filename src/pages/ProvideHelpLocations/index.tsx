@@ -31,12 +31,13 @@ export const ProvideHelpLocations = () => {
         </ButtonContainer>          
       </main>
     </Container>
-    <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+    <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal" >
     <ModalContent>
       <h3>A pessoa que precisa de socorro
       se encontra em:</h3>
       <h3>Rua Abrobrinha, 388</h3>
-      <p>OBS: Registro publicado há 10 minutos.</p>
+      <h4>OBS</h4>
+      <p>Registro publicado há 10 minutos.</p>
       <button onClick={() => {}}>
         MAPA
       </button>

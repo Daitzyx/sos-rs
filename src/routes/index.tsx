@@ -5,6 +5,7 @@ import { SharedLocation } from '../pages/SharedLocation'
 import { ProvideHelp } from '../pages/ProvideHelp'
 import { HelpLocations } from '../pages/HelpLocations'
 import { ProvideHelpLocations } from '../pages/ProvideHelpLocations'
+import { HelpPoints } from '../pages/HelpPoints'
 
 export const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
       <Route path="/pontos-ajuda" element={<HelpLocations />} />
       <Route path="/quero-ajudar-disclaimer" element={<ProvideHelp />} />
       <Route path="/quero-ajudar" element={<ProvideHelpLocations />} />
+      <Route path="/adicionar-ponto" element={<HelpPoints />} />
     </Routes>
   )
 }

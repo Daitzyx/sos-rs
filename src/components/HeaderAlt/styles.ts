@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
+
 export const Container = styled.header`
   height: min-content;
   display: flex;  
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
-  padding: 25px 0;
+  padding: 25px;
   gap: 5px;
 `
 
@@ -16,12 +17,11 @@ export const Title = styled.h1`
   flex-direction: column;
   align-items: center;
   gap: 5px;
-
-  margin-top: 15px;
-  font-size: 2.2rem;
+  
+  font-size: 2rem;
 
   span {
-    font-size: 2.7rem;
+    font-size: 2rem;
     display: inline-block;
     color: #e31e24;
   }

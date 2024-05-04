@@ -8,7 +8,7 @@ export const LocationCard = () => {
       <Card>
         <BiMapPin size={50}/>
         <Details>
-          <Street>Rua Abrobrinha</Street>
+          <Street></Street>
           <Distance>A 9 km de distância</Distance>
         </Details>
         <MapButton>MAPA</MapButton>

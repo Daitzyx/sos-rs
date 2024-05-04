@@ -12,8 +12,6 @@ export const Distances = () => {
             <button>25km</button>
             <button>+50km</button>
         </Kms>
-        
-
     </Container>
   )
 }
