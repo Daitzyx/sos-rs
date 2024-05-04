@@ -16,6 +16,8 @@ import usePagination from '../../hooks/usePagination'
 
 export const HelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
+  const [link, setLink] = useState('')
+
   const [selectedUser, setSelectedUser] = useState<any>(null)
 
   function closeModal() {
@@ -23,7 +25,10 @@ export const HelpLocations = () => {
   }
 
   function openModal(user: any) {
-    setSelectedUser(user)
+    const address = `${user.street}, ${user.number}, ${user.district}, ${user.city}`
+    setSelectedUser(address)
+    setLink(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`)
+
     setOpenedModal(true)
   }
 
@@ -61,8 +66,8 @@ export const HelpLocations = () => {
           <Distances onSelectDistance={filterLocationsByDistance} />
 
           <CardsContainer>
-            {currentItems.map((location: any) => (
-              <LocationCard key={location.id} location={location} />
+            {filteredLocations.map((location: any) => (
+              <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
             ))}
 
             {loading && <LoadingSpin />}
@@ -86,6 +91,9 @@ export const HelpLocations = () => {
             )}
           </PaginateButtons>
 
+          {filteredLocations.map((location: any) => (
+            <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
+          ))}
           <ButtonContainer>
             <Button width="100%" color="yellow" onClick={() => navigate('/adicionar-ponto')}>
               Adicionar
@@ -103,12 +111,8 @@ export const HelpLocations = () => {
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>{selectedUser.address}</h3>
-            <h4>OBS: {selectedUser.observation}</h4>
-            <Link
-              to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`}
-              target="_blank"
-            >
+            <h3>{selectedUser}</h3>
+            <Link to={link} target="_blank">
               <button>MAPA</button>
             </Link>
           </ModalContent>

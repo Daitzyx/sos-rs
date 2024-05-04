@@ -8,7 +8,7 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer, PaginateButtons } from './styles'
+import { Container, Title, ButtonContainer, PaginateButtons, ModalContent } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
 import { LoadingSpin } from '../../components/LoadingSpin'
@@ -35,7 +35,7 @@ function calculateTimeSincePublication(timestamp: string) {
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
-  const [selectedUser, setSelectedUser] = useState(null)
+  const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
   const { userLocation, loading } = useUserLocation()
@@ -60,11 +60,23 @@ export const ProvideHelpLocations = () => {
   }
 
   function openModal(user: any) {
-    setSelectedUser(user)
+    console.log(user, 'user')
     setOpenedModal(true)
+    const mapsUrl =
+      user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
+
+    const { address, observation } = user
+    const addressParts = address.split(',').filter((part: any) => part.trim() !== 'undefined')
+    const formattedAddress = addressParts.join(', ')
+    const selectedUserData = {
+      address: formattedAddress,
+      observation: observation,
+      mapsUrl
+    }
+    setSelectedUser(selectedUserData)
   }
 
-  const { nextPage, prevPage, currentItems, currentPage, totalPages } = usePagination(filteredUsers, 10)
+  const { nextPage, prevPage, totalPages } = usePagination(filteredUsers, 10)
 
   return (
     <>
@@ -110,22 +122,20 @@ export const ProvideHelpLocations = () => {
           </ButtonContainer>
         </main>
       </Container>
-      {/* <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+
+      <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
             <h3>{selectedUser.address}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
-            <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
-            <Link
-              to={https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}}
-              target="_blank"
-            >
+
+            <Link to={selectedUser.mapsUrl} target="_blank">
               <button>MAPA</button>
             </Link>
           </ModalContent>
         )}
-      </Modal> */}
+      </Modal>
     </>
   )
 }
