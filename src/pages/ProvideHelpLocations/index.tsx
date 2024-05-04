@@ -42,9 +42,9 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     filterUsersByDistance(50)
-  }, [])
+  }, []) */
   return (
     <>
       <Container>

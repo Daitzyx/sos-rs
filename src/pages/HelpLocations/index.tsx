@@ -4,7 +4,7 @@ import { Distances } from '../../components/Distances'
 import { Button } from '../../components/Button'
 import useFetchHelpLocations from './useFetchLocation'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { calculateDistance } from '../../utils/calculate'
 import useUserLocation from '../../hooks/useUserLocation'
 
@@ -21,19 +21,18 @@ export const HelpLocations = () => {
   }
 
   const filteredLocations =
-    selectedDistance && location
+    selectedDistance && userLocation
       ? locations.filter((location: any) => {
-          console.log(location)
           const distance = calculateDistance(
-            locations.latitude,
-            locations.longitude,
-            userLocation?.latitude,
-            userLocation?.longitude
+            location.latitude,
+            location.longitude,
+            userLocation.latitude,
+            userLocation.longitude
           )
           return distance <= selectedDistance
         })
       : locations
-
+  console.log(filteredLocations, 'filteredLocations')
   return (
     <Container>
       <HeaderAlt />
@@ -54,3 +53,4 @@ export const HelpLocations = () => {
     </Container>
   )
 }
+
