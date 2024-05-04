@@ -8,7 +8,7 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer } from './styles'
+import { Container, Title, ButtonContainer, ModalContent } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
 
@@ -33,10 +33,11 @@ function calculateTimeSincePublication(timestamp: string) {
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
-  const [selectedUser, setSelectedUser] = useState(null)
+  const [selectedUser, setSelectedUser] = useState<any>(null)
   const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
   const { userLocation } = useUserLocation()
+  const [link, setLink] = useState('')
 
   const filterUsersByDistance = (distance: any) => {
     setSelectedDistance(distance)
@@ -58,8 +59,11 @@ export const ProvideHelpLocations = () => {
   }
 
   function openModal(user: any) {
-    setSelectedUser(user)
     setOpenedModal(true)
+    console.log(user.address)
+    const addressParts = user.address.split(',').filter((part) => part.trim() !== 'undefined')
+    const address = addressParts.join(', ')
+    setSelectedUser(address)
   }
 
   /*   filterUsersByDistance(50) */
@@ -91,29 +95,32 @@ export const ProvideHelpLocations = () => {
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
           <ButtonContainer>
-            <Button width='100%' color="yellow">ATUALIZAR</Button>
+            <Button width="100%" color="yellow">
+              ATUALIZAR
+            </Button>
             <Link to="/">
-              <Button width='100%' color='black'>VOLTAR</Button>
+              <Button width="100%" color="black">
+                VOLTAR
+              </Button>
             </Link>
           </ButtonContainer>
-        </main> 
+        </main>
       </Container>
-     {/* <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+
+      <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>{selectedUser.address}</h3>
+            <h3>{selectedUser}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
-            <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
-            <Link
-              to={https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}}
-              target="_blank"
-            >
+
+            {/*   <Link to={link} target="_blank">
               <button>MAPA</button>
-            </Link>
+            </Link> */}
           </ModalContent>
         )}
-      </Modal> */}
+      </Modal>
     </>
   )
 }
+
