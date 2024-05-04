@@ -89,8 +89,11 @@ export const ProvideHelpLocations = () => {
           {filteredUsers.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
-
           {loading && <LoadingSpin />}
+
+          {filteredUsers.length === 0 && (
+            <p style={{ textAlign: 'center', padding: '15px' }}>Nada reportado até o momento!</p>
+          )}
 
           <PaginateButtons>
             {filteredUsers.length > 0 && (
@@ -109,7 +112,6 @@ export const ProvideHelpLocations = () => {
               </Button>
             )}
           </PaginateButtons>
-
           <ButtonContainer>
             <Button width="100%" color="yellow">
               ATUALIZAR
