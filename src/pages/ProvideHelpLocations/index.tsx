@@ -62,6 +62,8 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
+  /*   filterUsersByDistance(50) */
+
   // useEffect(() => {
   //   if (selectedUser) {
   //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
@@ -69,6 +71,10 @@ export const ProvideHelpLocations = () => {
   // }, [selectedUser, getAddressFromCoordinates]);
 
   // }, [])
+
+  // }, [])
+  /* useEffect(() => {
+  }, []) */
 
   filterUsersByDistance(50)
 

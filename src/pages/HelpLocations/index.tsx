@@ -38,19 +38,18 @@ export const HelpLocations = () => {
   }
 
   const filteredLocations =
-    selectedDistance && location
+    selectedDistance && userLocation
       ? locations.filter((location: any) => {
-          console.log(location)
           const distance = calculateDistance(
-            locations.latitude,
-            locations.longitude,
-            userLocation?.latitude,
-            userLocation?.longitude
+            location.latitude,
+            location.longitude,
+            userLocation.latitude,
+            userLocation.longitude
           )
           return distance <= selectedDistance
         })
       : locations
-
+  console.log(filteredLocations, 'filteredLocations')
   return (
     <>
       <Container>
