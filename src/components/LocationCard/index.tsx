@@ -1,6 +1,7 @@
-import { Card, Street, Distance, Details, MapButton } from './styles'
 import { BiMapPin } from 'react-icons/bi'
 import { SlOptionsVertical } from 'react-icons/sl'
+
+import { Card, Street, Distance, Details, MapButton, Options } from './styles'
 
 export const LocationCard = ({ location }: any) => {
   const address = `${location.street}, ${location.number}, ${location.district}, ${location.city}`
@@ -17,7 +18,9 @@ export const LocationCard = ({ location }: any) => {
       <MapButton as="a" href={mapsUrl} target="_blank">
         MAPA
       </MapButton>
-      <SlOptionsVertical />
+      <Options>
+        <SlOptionsVertical />
+      </Options>
     </Card>
   )
 }

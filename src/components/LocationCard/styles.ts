@@ -30,16 +30,21 @@ export const Details = styled.div`
 
   padding: 5px;
 
+  cursor: pointer;
 `
 
 export const Street = styled.p`
   font-Size: 14px;
   font-weight: 700;
-
 `
 
 export const Distance = styled.p`  
   font-size: 12px;
   font-weight: 600;
+`
 
+export const Options = styled.button` 
+  padding: 2px 5px;
+  
+  cursor: pointer;
 `

@@ -45,6 +45,8 @@ export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
+  padding: 10px;
   `
   
   export const ModalContent = styled.div`
@@ -57,11 +59,6 @@ export const ButtonContainer = styled.div`
 
     h3, h4{
       text-align: center;
-    } 
-
-    h4{
-      overflow-y: auto;
-      max-height: 200px;
     }
 
     p{

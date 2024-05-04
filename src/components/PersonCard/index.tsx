@@ -1,8 +1,10 @@
-import { Card, Street, Distance, Details, MapButton } from './styles'
 import { FaCircleUser } from 'react-icons/fa6'
-import { SlOptionsVertical } from 'react-icons/sl'
-import useReverseGeocoding from '../../hooks/useReverseGeoCoding'
 import { useEffect } from 'react'
+import { SlOptionsVertical } from 'react-icons/sl'
+
+import useReverseGeocoding from '../../hooks/useReverseGeoCoding'
+
+import { Card, Street, Distance, Details, MapButton, Options } from './styles'
 
 export const PersonCard = ({ user, ...props }: any) => {
   const mapsUrl = user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
@@ -23,7 +25,9 @@ export const PersonCard = ({ user, ...props }: any) => {
       <MapButton as="a" href={mapsUrl} target="_blank">
         MAPA
       </MapButton>
-      <SlOptionsVertical />
+      <Options>
+        <SlOptionsVertical />
+      </Options>
     </Card>
   )
 }
