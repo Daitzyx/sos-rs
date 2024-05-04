@@ -37,7 +37,6 @@ export const ProvideHelpLocations = () => {
   const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
   const { userLocation } = useUserLocation()
-  const [link, setLink] = useState('')
 
   const filterUsersByDistance = (distance: any) => {
     setSelectedDistance(distance)
@@ -59,13 +58,18 @@ export const ProvideHelpLocations = () => {
   }
 
   function openModal(user: any) {
+    console.log(user, 'user')
     setOpenedModal(true)
+    const mapsUrl =
+      user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
+
     const { address, observation } = user
     const addressParts = address.split(',').filter((part) => part.trim() !== 'undefined')
     const formattedAddress = addressParts.join(', ')
     const selectedUserData = {
       address: formattedAddress,
-      observation: observation
+      observation: observation,
+      mapsUrl
     }
     setSelectedUser(selectedUserData)
   }
@@ -118,9 +122,9 @@ export const ProvideHelpLocations = () => {
             <h3>{selectedUser.address}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
 
-            {/*   <Link to={link} target="_blank">
+            <Link to={selectedUser.mapsUrl} target="_blank">
               <button>MAPA</button>
-            </Link> */}
+            </Link>
           </ModalContent>
         )}
       </Modal>
