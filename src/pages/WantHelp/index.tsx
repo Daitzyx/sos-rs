@@ -1,4 +1,4 @@
-import { Container, Description, Form, Info, Title } from './styles'
+import { Container, Description, Form, Info, Title, OBS } from './styles'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import useWantHelpHook from './useWantHelpHook'
@@ -22,7 +22,7 @@ export const WantHelp = () => {
       <main>
         <Title>PRECISO DE AJUDA</Title>
         <Description>Por favor, compartilhe sua localização clicando no botão abaixo:</Description>
-
+        <OBS>OBS: Apenas compartilhe se você realmente precisa de ajuda.</OBS>
         <Form onSubmit={handleSubmit}>
           <textarea
             name="obs"

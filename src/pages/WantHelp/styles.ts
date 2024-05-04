@@ -36,8 +36,17 @@ export const Title = styled.h2`
 
 export const Description = styled.p`
   text-align: center;
-  color: ${theme.colors.black};
+  color: ${theme.colors.black}; 
 `
+
+export const OBS = styled.p`  
+  text-align: center;
+  font-style: italic;
+  color: ${theme.colors.red};
+  font-weight: ${theme.fontWeight.bold}; 
+  font-size: 14px;
+`
+
 
 export const Info = styled.p`
   padding: 10px;
