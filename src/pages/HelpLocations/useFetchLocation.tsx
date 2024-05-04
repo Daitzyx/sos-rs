@@ -11,14 +11,14 @@ interface HelpLocation {
   longitude: number
   observation: string
   timestamp: string
-  distance: number // Adicionando a propriedade distance
+  distance: number
 }
 
 const useFetchHelpLocations = () => {
   const [locations, setLocations] = useState<HelpLocation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const { userLocation } = useUserLocation() // Obtenha a localização do usuário
+  const { userLocation } = useUserLocation()
 
   useEffect(() => {
     const locationsRef = ref(db, 'helpPoints')
@@ -50,10 +50,9 @@ const useFetchHelpLocations = () => {
     )
 
     return () => unsubscribe()
-  }, [userLocation]) // Execute o efeito novamente sempre que a localização do usuário mudar
+  }, [userLocation])
 
   return { locations, loading, error }
 }
 
 export default useFetchHelpLocations
-

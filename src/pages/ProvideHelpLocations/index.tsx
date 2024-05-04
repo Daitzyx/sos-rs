@@ -8,7 +8,7 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer, ModalContent } from './styles'
+import { Container, Title, ButtonContainer } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
 

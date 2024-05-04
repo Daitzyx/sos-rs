@@ -10,15 +10,12 @@ import useFetchHelpLocations from './useFetchLocation'
 import { calculateDistance } from '../../utils/calculate'
 import useUserLocation from '../../hooks/useUserLocation'
 
-import useFetchUsers from '../ProvideHelpLocations/useFetchUsers'
-
 import { ButtonContainer, Container, Title, ModalContent } from './styles'
 
 export const HelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
   const { locations } = useFetchHelpLocations()
-  const { loading } = useFetchUsers()
 
   function closeModal() {
     setOpenedModal(false)
@@ -49,7 +46,7 @@ export const HelpLocations = () => {
           return distance <= selectedDistance
         })
       : locations
-  console.log(filteredLocations, 'filteredLocations')
+
   return (
     <>
       <Container>
