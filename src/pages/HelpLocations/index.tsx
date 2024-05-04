@@ -54,7 +54,7 @@ export const HelpLocations = () => {
         })
       : locations
 
-  const { nextPage, prevPage, currentItems, totalPages } = usePagination(filteredLocations, 10)
+  const { nextPage, prevPage, currentItems, totalPages } = usePagination(filteredLocations, 8)
 
   return (
     <>
@@ -66,7 +66,7 @@ export const HelpLocations = () => {
           <Distances onSelectDistance={filterLocationsByDistance} />
 
           <CardsContainer>
-            {filteredLocations.map((location: any) => (
+            {currentItems.map((location: any) => (
               <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
             ))}
 
@@ -91,9 +91,6 @@ export const HelpLocations = () => {
             )}
           </PaginateButtons>
 
-          {filteredLocations.map((location: any) => (
-            <LocationCard key={location.id} location={location} onClick={() => openModal(location)} />
-          ))}
           <ButtonContainer>
             <Button width="100%" color="yellow" onClick={() => navigate('/adicionar-ponto')}>
               Adicionar
