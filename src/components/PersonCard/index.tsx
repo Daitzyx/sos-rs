@@ -9,9 +9,12 @@ export const PersonCard = ({ user, ...props }: any) => {
   const { userLocation, loading, error } = useUserLocation()
   const mapsUrl = user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
 
-  const addressParts = user.address.split(',').slice(0, -1)
+  const addressParts = user.address
+    .split(',')
+    .filter((part) => !part.includes('undefined'))
+    .slice(0, -1)
   const address = addressParts.join(', ')
-
+  console.log(addressParts, 'addressParts')
   const [distance, setDistance] = useState<number | null>(null)
 
   useEffect(() => {
@@ -42,3 +45,4 @@ export const PersonCard = ({ user, ...props }: any) => {
     </Card>
   )
 }
+
