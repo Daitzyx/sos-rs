@@ -6,7 +6,7 @@ import { calculateDistance } from '../../utils/calculate'
 
 import { Card, Street, Distance, Details, MapButton, Options } from './styles'
 
-export const LocationCard = ({ location }: any) => {
+export const LocationCard = ({ location, ...props }: any) => {
   const { userLocation, loading, error } = useUserLocation()
 
   const address = `${location.street}, ${location.number}, ${location.district}, ${location.city}`
@@ -27,7 +27,7 @@ export const LocationCard = ({ location }: any) => {
   }, [loading, error, userLocation, location.latitude, location.longitude])
 
   return (
-    <Card>
+    <Card {...props}>
       <BiMapPin size={50} />
       <Details>
         <Street>
@@ -46,3 +46,4 @@ export const LocationCard = ({ location }: any) => {
     </Card>
   )
 }
+
