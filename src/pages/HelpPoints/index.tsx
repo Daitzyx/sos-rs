@@ -3,6 +3,7 @@ import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import useRegisterHelpPoint from './useRegisterHelpPoint'
 import { Link } from 'react-router-dom'
+import { formatCep } from '../../utils/formatCep'
 
 export const HelpPoints = () => {
   const { location, setLocation, loading, message, error, handleSubmit, handleBlurCep } = useRegisterHelpPoint()
@@ -23,10 +24,10 @@ export const HelpPoints = () => {
           <input
             name="cep"
             id="cep"
-            maxLength={8}
+            maxLength={9}
             value={location.cep}
             onBlur={handleBlurCep}
-            onChange={(e) => setLocation({ ...location, cep: e.target.value })}
+            onChange={(e) => setLocation({ ...location, cep: formatCep(e.target.value) })}
             placeholder="Cep do local"
           />
           <input

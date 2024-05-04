@@ -20,7 +20,7 @@ export const HelpLocations = () => {
     setOpenedModal(false)
   }
 
-  function openModal(user: any) {    
+  function openModal(user: any) {
     setSelectedUser(user)
     setOpenedModal(true)
   }
@@ -35,14 +35,13 @@ export const HelpLocations = () => {
   }
 
   const filteredLocations =
-    selectedDistance && location
+    selectedDistance && userLocation
       ? locations.filter((location: any) => {
-          console.log(location)
           const distance = calculateDistance(
-            locations.latitude,
-            locations.longitude,
-            userLocation?.latitude,
-            userLocation?.longitude
+            location.latitude,
+            location.longitude,
+            userLocation.latitude,
+            userLocation.longitude
           )
           return distance <= selectedDistance
         })
@@ -50,39 +49,41 @@ export const HelpLocations = () => {
 
   return (
     <>
-    <Container>
-      <HeaderAlt />
+      <Container>
+        <HeaderAlt />
 
-      <main>
-        <Title>PONTOS DE AJUDA</Title>
-        <Distances onSelectDistance={filterLocationsByDistance} />
+        <main>
+          <Title>PONTOS DE AJUDA</Title>
+          <Distances onSelectDistance={filterLocationsByDistance} />
 
-        {filteredLocations.map((location: any) => (
-          <LocationCard key={location.id} location={location} />
-        ))}
-        <ButtonContainer>
-          <Button width='100%' color="yellow" onClick={() => navigate('/adicionar-ponto')}>
-            Adicionar
-          </Button>
-        </ButtonContainer>
-        <Link to="/">
-          <Button width='100%' color='black'>VOLTAR</Button>
-        </Link>
-      </main>
-    </Container>
-    <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
-    {selectedUser && (
-      <ModalContent>
-        <h3>A pessoa que precisa de socorro se encontra em:</h3>
-        <h3>{selectedUser.address}</h3>
-        <h4>OBS: {selectedUser.observation}</h4>        
-        <Link to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`} target='_blank'>
-          <button>MAPA
-          </button>
-        </Link>
-      </ModalContent>
-    )}
-  </Modal>
-  </>
+          {filteredLocations.map((location: any) => (
+            <LocationCard key={location.id} location={location} />
+          ))}
+          <ButtonContainer>
+            <Button width='100%' color="yellow" onClick={() => navigate('/adicionar-ponto')}>
+              Adicionar
+            </Button>
+            <Link to="/">
+              <Button width='100%' color='black'>VOLTAR</Button>
+            </Link>
+          </ButtonContainer>          
+        </main>
+      </Container>
+      <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+        {selectedUser && (
+          <ModalContent>
+            <h3>A pessoa que precisa de socorro se encontra em:</h3>
+            <h3>{selectedUser.address}</h3>
+            <h4>OBS: {selectedUser.observation}</h4>
+            <Link
+              to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`}
+              target="_blank"
+            >
+              <button>MAPA</button>
+            </Link>
+          </ModalContent>
+        )}
+      </Modal>
+    </>
   )
 }

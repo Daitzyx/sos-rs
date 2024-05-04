@@ -8,27 +8,27 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer, ModalContent } from './styles'
+import { Container, Title, ButtonContainer } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
 
 function calculateTimeSincePublication(timestamp: string) {
-  const selectedUserTimestamp = new Date(timestamp);
-  const currentTime = new Date();
+  const selectedUserTimestamp = new Date(timestamp)
+  const currentTime = new Date()
 
-  const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime();
-  const minutesSincePublication = Math.floor(timeDifference / (1000 * 60));
-  const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60));
+  const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
+  const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
+  const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
 
-  let timeSincePublicationString;
+  let timeSincePublicationString
 
   if (hoursSincePublication > 0) {
-      timeSincePublicationString = `${hoursSincePublication} horas`;
+    timeSincePublicationString = `${hoursSincePublication} horas`
   } else {
-      timeSincePublicationString = `${minutesSincePublication} minutos`;
+    timeSincePublicationString = `${minutesSincePublication} minutos`
   }
 
-  return `${timeSincePublicationString}`;
+  return `${timeSincePublicationString}`
 }
 
 export const ProvideHelpLocations = () => {
@@ -57,14 +57,28 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(false)
   }
 
-  function openModal(user: any) {    
+  function openModal(user: any) {
     setSelectedUser(user)
     setOpenedModal(true)
   }
 
+  /*   filterUsersByDistance(50) */
 
-  filterUsersByDistance(50)
+  // useEffect(() => {
+  //   if (selectedUser) {
+  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
+  //   }
+  // }, [selectedUser, getAddressFromCoordinates]);
 
+  // }, [])
+
+  // }, [])
+  /* useEffect(() => {
+  }, []) */
+
+  // filterUsersByDistance(50)
+
+  console.log(selectedUser)
   return (
     <>
       <Container>
@@ -77,25 +91,29 @@ export const ProvideHelpLocations = () => {
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
           <ButtonContainer>
-            <Button color="black">Atualizar</Button>
+            <Button width='100%' color="yellow">ATUALIZAR</Button>
+            <Link to="/">
+              <Button width='100%' color='black'>VOLTAR</Button>
+            </Link>
           </ButtonContainer>
         </main> 
       </Container>
-      <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+     {/* <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            {/* <h3>{selectedUser.address}</h3> */}
-            {/* <h4>OBS: {selectedUser.observation}</h4> */}
-            {/* <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p> */}
-            {/* <Link to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`} target='_blank'> */}
-              <button>MAPA
-              </button>
-            {/* </Link> */}
+            <h3>{selectedUser.address}</h3>
+            <h4>OBS: {selectedUser.observation}</h4>
+            <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
+            <Link
+              to={https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}}
+              target="_blank"
+            >
+              <button>MAPA</button>
+            </Link>
           </ModalContent>
         )}
-      </Modal>
+      </Modal> */}
     </>
   )
 }
-
