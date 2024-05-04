@@ -22,9 +22,10 @@ const useRegisterHelpPoint = () => {
   const { coordinates, getCoordinatesFromAddress } = useGeocoding()
 
   const handleBlurCep = async () => {
-    const cep = location.cep
+    const cep = location.cep.replace('-', '')
+    console.log(cep)
 
-    if (cep.trim().length !== 8) {
+    if (cep.trim().length !== 9) {
       setError('CEP inválido. O CEP deve conter 8 dígitos.')
       return
     }

@@ -8,7 +8,7 @@ const useFetchUsers = () => {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const { userLocation } = useUserLocation() // Obtenha a localização do usuário
+  const { userLocation } = useUserLocation()
 
   useEffect(() => {
     const usersRef = ref(db, 'emergencies')
@@ -46,4 +46,3 @@ const useFetchUsers = () => {
 }
 
 export default useFetchUsers
-
