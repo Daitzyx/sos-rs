@@ -14,7 +14,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    padding: 20px 0;
   }
 
   @media (min-width: 768px) {
@@ -23,7 +24,7 @@ export const Container = styled.div`
       align-self: center;
 
       display: flex;
-      flex-direction: column;      
+      flex-direction: column;
       gap: 2rem;
     }
   }
@@ -34,10 +35,9 @@ export const Title = styled.h2`
   color: ${theme.colors.black};
 `
 
-export const LocationsContainer = styled.div`  
+export const LocationsContainer = styled.div`
   display: flex;
-  flex-direction: column;  
-
+  flex-direction: column;
 `
 
 export const ButtonContainer = styled.div`

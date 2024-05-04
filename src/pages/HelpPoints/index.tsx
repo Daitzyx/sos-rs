@@ -4,7 +4,7 @@ import { Button } from '../../components/Button'
 import useRegisterHelpPoint from './useRegisterHelpPoint'
 
 export const HelpPoints = () => {
-  const { location, setLocation, loading, message, error, handleSubmit } = useRegisterHelpPoint()
+  const { location, setLocation, loading, message, error, handleSubmit, handleBlurCep } = useRegisterHelpPoint()
 
   return (
     <Container>
@@ -19,6 +19,15 @@ export const HelpPoints = () => {
         </Description>
 
         <Form onSubmit={handleSubmit}>
+          <input
+            name="cep"
+            id="cep"
+            maxLength={8}
+            value={location.cep}
+            onBlur={handleBlurCep}
+            onChange={(e) => setLocation({ ...location, cep: e.target.value })}
+            placeholder="Cep do local"
+          />
           <input
             name="name"
             id="name"
@@ -66,4 +75,3 @@ export const HelpPoints = () => {
     </Container>
   )
 }
-

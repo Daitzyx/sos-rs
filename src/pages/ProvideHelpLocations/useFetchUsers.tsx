@@ -8,7 +8,7 @@ const useFetchUsers = () => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const usersRef = ref(db, 'emergencies') // Assumindo que os dados dos usuários estão armazenados em 'users'
+    const usersRef = ref(db, 'emergencies')
     const unsubscribe = onValue(
       usersRef,
       (snapshot) => {
@@ -23,7 +23,7 @@ const useFetchUsers = () => {
         setUsers(loadedUsers)
         setLoading(false)
       },
-      (error) => {
+      (error: any) => {
         setError(error.message)
         setLoading(false)
       }
@@ -36,4 +36,3 @@ const useFetchUsers = () => {
 }
 
 export default useFetchUsers
-

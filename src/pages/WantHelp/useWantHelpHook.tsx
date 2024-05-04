@@ -10,40 +10,52 @@ const useWantHelpHook = () => {
 
   const navigate = useNavigate()
 
+  const getAddressFromCoordinates = async (latitude: number | string, longitude: number | string) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      )
+      const data = await response.json()
+      if (data.error) {
+        throw new Error(data.error)
+      } else {
+        const { road, suburb, city, state } = data.address
+        return `${road}, ${suburb}, ${city}, ${state}`
+      }
+    } catch (error: any) {
+      throw new Error('Failed to fetch address: ' + error.message)
+    }
+  }
+
   const requestAndSaveLocation = async (textareaData?: string) => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by your browser.')
       return
     }
 
-    // const confirmAccess = window.confirm(
-    //   'We need access to your location to enhance our services and provide better support. Can we proceed?'
-    // )
-    // if (!confirmAccess) {
-    //   setError('Location access is required for the functionality of this app. Please enable it in your settings.')
-    //   return
-    // }
-
     setLoading(true)
-    setError(null) // Limpa erros anteriores
+    setError(null)
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords
         const timestamp = new Date().toISOString()
 
-        const newLocationRef = push(ref(db, 'emergencies'))
-
         try {
+          const address = await getAddressFromCoordinates(latitude, longitude)
+
+          const newLocationRef = push(ref(db, 'emergencies'))
+
           await set(newLocationRef, {
             observation: textareaData,
             latitude,
             longitude,
+            address,
             timestamp
           })
+
           setLoading(false)
           navigate('/localizacao-compartilhada')
-
           setError(null)
         } catch (error: any) {
           setError('Failed to save data: ' + error.message)
@@ -83,4 +95,3 @@ const useWantHelpHook = () => {
 }
 
 export default useWantHelpHook
-

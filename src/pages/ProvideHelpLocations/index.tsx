@@ -2,7 +2,7 @@ import { useState } from 'react'
 import useFetchUsers from './useFetchUsers'
 
 import { HeaderAlt } from '../../components/HeaderAlt'
-import { Distances } from '../../components/Distances'
+// import { Distances } from '../../components/Distances'
 import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
@@ -12,7 +12,7 @@ import { Container, Title, ButtonContainer, ModalContent } from './styles'
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
-  const { users, loading, error } = useFetchUsers()
+  const { users } = useFetchUsers()
 
   function closeModal() {
     setOpenedModal(false)
@@ -23,8 +23,8 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  // if (loading) return <p>Loading...</p>
+  // if (error) return <p>Error: {error}</p>
 
   console.log(users, 'users')
   return (
@@ -34,7 +34,7 @@ export const ProvideHelpLocations = () => {
 
         <main>
           <Title>Listando pessoas a um raio de 10km de distância</Title>
-          <Distances />
+          {/* <Distances /> */}
 
           {users.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
@@ -57,4 +57,3 @@ export const ProvideHelpLocations = () => {
     </>
   )
 }
-
