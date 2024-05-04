@@ -1,11 +1,16 @@
 import ReactModal from 'react-modal'
 
+import { IoCloseCircleOutline } from "react-icons/io5";
+
+import { CloseButton, Details } from './styles';
+
 type Props = {
   isOpen: boolean
   onRequestClose: () => void
   contentLabel?: string
   children: React.ReactNode
 }
+
 export const Modal = ({ isOpen, onRequestClose, contentLabel, children }: Props) => {
   const customStyles = {
     content: {
@@ -26,7 +31,12 @@ export const Modal = ({ isOpen, onRequestClose, contentLabel, children }: Props)
   }
 
   return (
-    <ReactModal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={contentLabel} style={customStyles}>
+    <ReactModal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={contentLabel} style={customStyles}>   
+      <Details>
+        <CloseButton>
+          <IoCloseCircleOutline size={30} />
+        </CloseButton>
+      </Details>  
       {children}
     </ReactModal>
   )

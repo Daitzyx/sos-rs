@@ -14,7 +14,7 @@ export const Home = () => {
           <Link to="preciso-ajuda">
             <Button color="red">PRECISO DE AJUDA</Button>
           </Link>
-          <Link to="quero-ajudar">
+          <Link to="/quero-ajudar-disclaimer">
             <Button color="yellow">QUERO AJUDAR</Button>
           </Link>
           <Link to="pontos-ajuda">
