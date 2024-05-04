@@ -30,6 +30,23 @@ export const Container = styled.div`
   }
 `
 
+export const CardsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+`
+
+export const PaginateButtons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    padding: 4px;
+  }
+`
+
 export const Title = styled.h2`
   text-align: center;
   color: ${theme.colors.black};
@@ -43,5 +60,36 @@ export const LocationsContainer = styled.div`
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 10px;
+`
+
+export const ModalContent = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+  padding: 10px;
+
+  h3,
+  h4 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    color: ${theme.colors.red};
+    font-weight: ${theme.fontWeight.bold};
+    font-style: italic;
+  }
+
+  button {
+    padding: 5px 20px;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    font-size: ${theme.fontSize.xl};
+  }
 `

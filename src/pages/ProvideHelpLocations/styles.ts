@@ -30,6 +30,16 @@ export const Container = styled.div`
   }
 `
 
+export const PaginateButtons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    padding: 4px;
+  }
+`
+
 export const Title = styled.p`
   text-align: center;
   color: ${theme.colors.black};
@@ -43,7 +53,9 @@ export const LocationsContainer = styled.div`
 export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 10px;
 `
 
 export const ModalContent = styled.div`

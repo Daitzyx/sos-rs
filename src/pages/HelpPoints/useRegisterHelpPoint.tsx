@@ -3,7 +3,6 @@ import { ref, set, push } from 'firebase/database'
 import { db } from '../../libs/firebase'
 import { useNavigate } from 'react-router-dom'
 import { fetchAddressData } from '../../services/cep'
-import useGeocoding from '../../hooks/useGeocoding'
 
 const useRegisterHelpPoint = () => {
   const [location, setLocation] = useState({
@@ -19,13 +18,10 @@ const useRegisterHelpPoint = () => {
   const [error, setError] = useState<null | string>(null)
   const navigate = useNavigate()
 
-  const { coordinates, getCoordinatesFromAddress } = useGeocoding()
-
   const handleBlurCep = async () => {
-    const cep = location.cep
+    const cep = location.cep.trim().replace('-', '')
 
-    if (cep.trim().length !== 8) {
-      // Verifica se o CEP tem 8 dígitos
+    if (cep.length !== 8) {
       setError('CEP inválido. O CEP deve conter 8 dígitos.')
       return
     }
@@ -44,21 +40,38 @@ const useRegisterHelpPoint = () => {
         district: addressData.bairro,
         city: addressData.localidade
       })
-
-      getCoordinatesFromAddress({
-        street: addressData.logradouro,
-        district: addressData.bairro,
-        city: addressData.localidade
-      })
     }
 
     setLoading(false)
   }
 
+  const getAddressCoordinates = async (address: string) => {
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          address
+        )}&key=AIzaSyABsgLbHflDfzvONwFN28h6KyyuKTPejdE`
+      )
+      const data = await response.json()
+      if (data.results && data.results.length > 0) {
+        const location = data.results[0].geometry.location
+        return {
+          latitude: location.lat,
+          longitude: location.lng
+        }
+      } else {
+        throw new Error('Endereço não encontrado')
+      }
+    } catch (error: any) {
+      console.error('Erro ao obter coordenadas do endereço:', error.message)
+      return null
+    }
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    if (!location.name || !location.street || !location.number || !location.district || !location.city) {
+    if (!location.street || !location.number || !location.district || !location.city) {
       setError('Todos os campos são obrigatórios')
       return
     }
@@ -67,9 +80,14 @@ const useRegisterHelpPoint = () => {
     setMessage('')
     setError(null)
 
-    const newHelpPointRef = push(ref(db, 'helpPoints'))
-    console.log(coordinates.latitude, coordinates.longitude)
     try {
+      const address = `${location.street}, ${location.number}, ${location.district}, ${location.city}`
+      const coordinates = await getAddressCoordinates(address)
+      if (!coordinates) {
+        throw new Error('Coordenadas não encontradas para o endereço fornecido')
+      }
+
+      const newHelpPointRef = push(ref(db, 'helpPoints'))
       await set(newHelpPointRef, {
         cep: location.cep,
         name: location.name,
@@ -77,9 +95,10 @@ const useRegisterHelpPoint = () => {
         number: location.number,
         district: location.district,
         city: location.city,
-        latitude: coordinates.latitude, // Inclua a latitude
+        latitude: coordinates.latitude,
         longitude: coordinates.longitude
       })
+
       setLoading(false)
       setMessage('Cadastrado com sucesso!')
       navigate('/')

@@ -91,7 +91,7 @@ const useWantHelpHook = () => {
     }
   }
 
-  return { saveLocationToFirebase: requestAndSaveLocation, loading, error, message }
+  return { saveLocationToFirebase: requestAndSaveLocation, loading, error, message, }
 }
 
 export default useWantHelpHook
