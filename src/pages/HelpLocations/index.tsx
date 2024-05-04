@@ -54,7 +54,7 @@ export const HelpLocations = () => {
         })
       : locations
 
-  const { nextPage, prevPage, currentItems, totalPages } = usePagination(filteredLocations, 8)
+  const { nextPage, prevPage, currentItems } = usePagination(filteredLocations, 4)
 
   return (
     <>
@@ -79,11 +79,7 @@ export const HelpLocations = () => {
                 Anterior
               </Button>
             )}
-            {[...Array(totalPages).keys()].map((page) => (
-              <Button width="20%" key={page}>
-                {page + 1}
-              </Button>
-            ))}
+
             {locations.length > 0 && (
               <Button width="25%" onClick={nextPage}>
                 Próxima
