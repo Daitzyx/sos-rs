@@ -11,7 +11,7 @@ export const WantHelp = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     saveLocationToFirebase(textareaData)
-    setTextareaData('') // Limpa o campo após o envio
+    setTextareaData('')
   }
 
   return (
@@ -43,4 +43,3 @@ export const WantHelp = () => {
     </Container>
   )
 }
-

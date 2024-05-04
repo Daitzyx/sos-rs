@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useFetchUsers from './useFetchUsers'
 import { Link } from 'react-router-dom'
-import useReverseGeocoding from '../../hooks/useReverseGeoCoding'
-
 
 import { HeaderAlt } from '../../components/HeaderAlt'
 import { Distances } from '../../components/Distances'
@@ -11,6 +9,8 @@ import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
 import { Container, Title, ButtonContainer, ModalContent } from './styles'
+import useUserLocation from '../../hooks/useUserLocation'
+import { calculateDistance } from '../../utils/calculate'
 
 function calculateTimeSincePublication(timestamp: string) {
   const selectedUserTimestamp = new Date(timestamp);
@@ -33,10 +33,25 @@ function calculateTimeSincePublication(timestamp: string) {
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
-  const [selectedUser, setSelectedUser] = useState<any>(null)
-  const { users, loading, error } = useFetchUsers()
-  const { address, getAddressFromCoordinates } = useReverseGeocoding()
-  
+  const [selectedUser, setSelectedUser] = useState(null)
+  const [selectedDistance, setSelectedDistance] = useState(50)
+  const { users } = useFetchUsers()
+  const { userLocation } = useUserLocation()
+
+  const filterUsersByDistance = (distance: any) => {
+    setSelectedDistance(distance)
+  }
+
+  const filteredUsers =
+    selectedDistance && userLocation
+      ? users
+          .map((user: any) => ({
+            ...user,
+            distance: calculateDistance(user.latitude, user.longitude, userLocation.latitude, userLocation.longitude)
+          }))
+          .filter((user: any) => user.distance <= selectedDistance)
+          .sort((a: any, b: any) => a.distance - b.distance)
+      : users
 
   function closeModal() {
     setOpenedModal(false)
@@ -47,25 +62,25 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
-  useEffect(() => {
-    if (selectedUser) {
-      getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
-    }
-  }, [selectedUser, getAddressFromCoordinates]);
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  // useEffect(() => {
+  //   if (selectedUser) {
+  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
+  //   }
+  // }, [selectedUser, getAddressFromCoordinates]);
   
+  // }, [])
+
+  filterUsersByDistance(50)
+
   return (
     <>
       <Container>
         <HeaderAlt />
 
         <main>
-          <Title>Listando pessoas a um raio de 10km de distância</Title>
-          <Distances />
-
-          {users.map((user: any) => (
+          <Title>Listando pessoas a um raio de {selectedDistance}km de distância</Title>
+          <Distances onSelectDistance={filterUsersByDistance} />
+          {filteredUsers.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
           <ButtonContainer>
@@ -77,7 +92,7 @@ export const ProvideHelpLocations = () => {
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>{address}</h3>
+            <h3>{selectedUser.address}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
             <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
             <Link to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`} target='_blank'>

@@ -13,7 +13,8 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    padding: 20px 0;
   }
 
   @media (min-width: 768px) {
@@ -62,4 +63,3 @@ export const Form = styled.form`
     margin-bottom: 15px;
   }
 `
-

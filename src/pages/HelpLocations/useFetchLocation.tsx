@@ -2,8 +2,17 @@ import { useState, useEffect } from 'react'
 import { onValue, ref } from 'firebase/database'
 import { db } from '../../libs/firebase'
 
+interface Location {
+  id: string
+  address: string
+  latitude: number
+  longitude: number
+  observation: string
+  timestamp: string
+}
+
 const useFetchHelpLocations = () => {
-  const [locations, setLocations] = useState([])
+  const [locations, setLocations] = useState<Location | any>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -23,7 +32,7 @@ const useFetchHelpLocations = () => {
         setLocations(loadedLocations)
         setLoading(false)
       },
-      (error) => {
+      (error: any) => {
         setError(error.message)
         setLoading(false)
       }

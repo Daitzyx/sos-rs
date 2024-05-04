@@ -4,7 +4,7 @@ import { theme } from '../../styles/Theme'
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  display: flex;  
+  display: flex;
   flex-direction: column;
 
   main {
@@ -14,7 +14,8 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    padding: 20px 0;
   }
 
   @media (min-width: 768px) {
@@ -38,9 +39,9 @@ export const Disclaimer = styled.p`
   text-align: center;
   color: ${theme.colors.black};
   line-height: 1.5;
-  `
+`
 
-  export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
