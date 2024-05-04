@@ -60,10 +60,14 @@ export const ProvideHelpLocations = () => {
 
   function openModal(user: any) {
     setOpenedModal(true)
-    console.log(user.address)
-    const addressParts = user.address.split(',').filter((part) => part.trim() !== 'undefined')
-    const address = addressParts.join(', ')
-    setSelectedUser(address)
+    const { address, observation } = user
+    const addressParts = address.split(',').filter((part) => part.trim() !== 'undefined')
+    const formattedAddress = addressParts.join(', ')
+    const selectedUserData = {
+      address: formattedAddress,
+      observation: observation
+    }
+    setSelectedUser(selectedUserData)
   }
 
   /*   filterUsersByDistance(50) */
@@ -111,7 +115,7 @@ export const ProvideHelpLocations = () => {
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>{selectedUser}</h3>
+            <h3>{selectedUser.address}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
 
             {/*   <Link to={link} target="_blank">
