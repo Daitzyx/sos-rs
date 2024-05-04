@@ -14,24 +14,24 @@ import { calculateDistance } from '../../utils/calculate'
 import { LoadingSpin } from '../../components/LoadingSpin'
 import usePagination from '../../hooks/usePagination'
 
-function calculateTimeSincePublication(timestamp: string) {
-  const selectedUserTimestamp = new Date(timestamp)
-  const currentTime = new Date()
+// function calculateTimeSincePublication(timestamp: string) {
+//   const selectedUserTimestamp = new Date(timestamp)
+//   const currentTime = new Date()
 
-  const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
-  const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
-  const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
+//   const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
+//   const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
+//   const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
 
-  let timeSincePublicationString
+//   let timeSincePublicationString
 
-  if (hoursSincePublication > 0) {
-    timeSincePublicationString = `${hoursSincePublication} horas`
-  } else {
-    timeSincePublicationString = `${minutesSincePublication} minutos`
-  }
+//   if (hoursSincePublication > 0) {
+//     timeSincePublicationString = `${hoursSincePublication} horas`
+//   } else {
+//     timeSincePublicationString = `${minutesSincePublication} minutos`
+//   }
 
-  return `${timeSincePublicationString}`
-}
+//   return `${timeSincePublicationString}`
+// }
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
@@ -76,7 +76,7 @@ export const ProvideHelpLocations = () => {
     setSelectedUser(selectedUserData)
   }
 
-  const { nextPage, prevPage, totalPages } = usePagination(filteredUsers, 10)
+  const { nextPage, prevPage, currentItems } = usePagination(filteredUsers, 10)
 
   return (
     <>
@@ -96,16 +96,12 @@ export const ProvideHelpLocations = () => {
           )}
 
           <PaginateButtons>
-            {filteredUsers.length > 0 && (
+            {currentItems.length > 0 && (
               <Button width="25%" onClick={prevPage}>
                 Anterior
               </Button>
             )}
-            {[...Array(totalPages).keys()].map((page) => (
-              <Button width="20%" key={page}>
-                {page + 1}
-              </Button>
-            ))}
+
             {filteredUsers.length > 0 && (
               <Button width="25%" onClick={nextPage}>
                 Próxima
