@@ -25,7 +25,6 @@ const useRegisterHelpPoint = () => {
     const cep = location.cep
 
     if (cep.trim().length !== 8) {
-      // Verifica se o CEP tem 8 dígitos
       setError('CEP inválido. O CEP deve conter 8 dígitos.')
       return
     }
@@ -58,7 +57,7 @@ const useRegisterHelpPoint = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
-    if (!location.name || !location.street || !location.number || !location.district || !location.city) {
+    if (!location.street || !location.number || !location.district || !location.city) {
       setError('Todos os campos são obrigatórios')
       return
     }
@@ -68,7 +67,6 @@ const useRegisterHelpPoint = () => {
     setError(null)
 
     const newHelpPointRef = push(ref(db, 'helpPoints'))
-    console.log(coordinates.latitude, coordinates.longitude)
     try {
       await set(newHelpPointRef, {
         cep: location.cep,
@@ -77,7 +75,7 @@ const useRegisterHelpPoint = () => {
         number: location.number,
         district: location.district,
         city: location.city,
-        latitude: coordinates.latitude, // Inclua a latitude
+        latitude: coordinates.latitude,
         longitude: coordinates.longitude
       })
       setLoading(false)

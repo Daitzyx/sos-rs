@@ -30,7 +30,7 @@ export const ProvideHelpLocations = () => {
             distance: calculateDistance(user.latitude, user.longitude, userLocation.latitude, userLocation.longitude)
           }))
           .filter((user: any) => user.distance <= selectedDistance)
-          .sort((a: any, b: any) => a.distance - b.distance) // Ordena por distância crescente
+          .sort((a: any, b: any) => a.distance - b.distance)
       : users
 
   function closeModal() {
