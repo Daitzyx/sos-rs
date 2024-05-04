@@ -8,9 +8,11 @@ import { PersonCard } from '../../components/PersonCard'
 import { Button } from '../../components/Button'
 import { Modal } from '../../components/Modal'
 
-import { Container, Title, ButtonContainer } from './styles'
+import { Container, Title, ButtonContainer, PaginateButtons } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
+import { LoadingSpin } from '../../components/LoadingSpin'
+import usePagination from '../../hooks/usePagination'
 
 function calculateTimeSincePublication(timestamp: string) {
   const selectedUserTimestamp = new Date(timestamp)
@@ -36,7 +38,7 @@ export const ProvideHelpLocations = () => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
-  const { userLocation } = useUserLocation()
+  const { userLocation, loading } = useUserLocation()
 
   const filterUsersByDistance = (distance: any) => {
     setSelectedDistance(distance)
@@ -62,23 +64,8 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
-  /*   filterUsersByDistance(50) */
+  const { nextPage, prevPage, currentItems, currentPage, totalPages } = usePagination(filteredUsers, 10)
 
-  // useEffect(() => {
-  //   if (selectedUser) {
-  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
-  //   }
-  // }, [selectedUser, getAddressFromCoordinates]);
-
-  // }, [])
-
-  // }, [])
-  /* useEffect(() => {
-  }, []) */
-
-  // filterUsersByDistance(50)
-
-  console.log(selectedUser)
   return (
     <>
       <Container>
@@ -90,15 +77,40 @@ export const ProvideHelpLocations = () => {
           {filteredUsers.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
+
+          {loading && <LoadingSpin />}
+
+          <PaginateButtons>
+            {filteredUsers.length > 0 && (
+              <Button width="25%" onClick={prevPage}>
+                Anterior
+              </Button>
+            )}
+            {[...Array(totalPages).keys()].map((page) => (
+              <Button width="20%" key={page}>
+                {page + 1}
+              </Button>
+            ))}
+            {filteredUsers.length > 0 && (
+              <Button width="25%" onClick={nextPage}>
+                Próxima
+              </Button>
+            )}
+          </PaginateButtons>
+
           <ButtonContainer>
-            <Button width='100%' color="yellow">ATUALIZAR</Button>
+            <Button width="100%" color="yellow">
+              ATUALIZAR
+            </Button>
             <Link to="/">
-              <Button width='100%' color='black'>VOLTAR</Button>
+              <Button width="100%" color="black">
+                VOLTAR
+              </Button>
             </Link>
           </ButtonContainer>
-        </main> 
+        </main>
       </Container>
-     {/* <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
+      {/* <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
