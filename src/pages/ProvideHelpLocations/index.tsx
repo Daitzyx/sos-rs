@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import useFetchUsers from './useFetchUsers'
 import { Link } from 'react-router-dom'
 
@@ -62,13 +62,6 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
-  // useEffect(() => {
-  //   if (selectedUser) {
-  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
-  //   }
-  // }, [selectedUser, getAddressFromCoordinates]);
-  
-  // }, [])
 
   filterUsersByDistance(50)
 
@@ -86,19 +79,19 @@ export const ProvideHelpLocations = () => {
           <ButtonContainer>
             <Button color="black">Atualizar</Button>
           </ButtonContainer>
-        </main>
+        </main> 
       </Container>
       <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>{selectedUser.address}</h3>
-            <h4>OBS: {selectedUser.observation}</h4>
-            <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
-            <Link to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`} target='_blank'>
+            {/* <h3>{selectedUser.address}</h3> */}
+            {/* <h4>OBS: {selectedUser.observation}</h4> */}
+            {/* <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p> */}
+            {/* <Link to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`} target='_blank'> */}
               <button>MAPA
               </button>
-            </Link>
+            {/* </Link> */}
           </ModalContent>
         )}
       </Modal>

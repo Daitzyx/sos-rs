@@ -3,6 +3,7 @@ import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import useWantHelpHook from './useWantHelpHook'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const WantHelp = () => {
   const { saveLocationToFirebase, loading, error, message } = useWantHelpHook()
@@ -31,7 +32,7 @@ export const WantHelp = () => {
             onChange={(e) => setTextareaData(e.target.value)}
             placeholder="Descreva alguma informação importante ou alguma observação"
           ></textarea>
-          <Button width="100%" color="black" disabled={loading}>
+          <Button width="100%" color="yellow" disabled={loading}>
             {loading ? 'Salvando...' : 'COMPARTILHAR LOCALIZAÇÃO'}
           </Button>
 
@@ -39,6 +40,9 @@ export const WantHelp = () => {
 
           {message && <Info>{message}</Info>}
         </Form>
+        <Link to="/">
+          <Button width='100%' color='black'>VOLTAR</Button>
+        </Link>
       </main>
     </Container>
   )

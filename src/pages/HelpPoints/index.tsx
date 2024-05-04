@@ -2,6 +2,7 @@ import { Container, Description, Form, Info, Title } from './styles'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import useRegisterHelpPoint from './useRegisterHelpPoint'
+import { Link } from 'react-router-dom'
 
 export const HelpPoints = () => {
   const { location, setLocation, loading, message, error, handleSubmit, handleBlurCep } = useRegisterHelpPoint()
@@ -64,13 +65,16 @@ export const HelpPoints = () => {
             placeholder="Cidade *"
           />
 
-          <Button type="submit" width="100%" color="black" disabled={loading}>
+          <Button type="submit" width="100%" color="yellow" disabled={loading}>
             {loading ? 'Salvando...' : 'Cadastrar'}
           </Button>
 
           {error && <Info>{error}</Info>}
           {message && <Info>{message}</Info>}
         </Form>
+        <Link to="/pontos-ajuda">
+          <Button width='100%' color='black'>VOLTAR</Button>
+        </Link>
       </main>
     </Container>
   )

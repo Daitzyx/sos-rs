@@ -10,16 +10,12 @@ import useFetchHelpLocations from './useFetchLocation'
 import { calculateDistance } from '../../utils/calculate'
 import useUserLocation from '../../hooks/useUserLocation'
 
-import useFetchUsers from '../ProvideHelpLocations/useFetchUsers'
-
-
 import { ButtonContainer, Container, Title, ModalContent } from './styles'
 
 export const HelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
-  const { loading, error } = useFetchUsers()
- 
+  
   function closeModal() {
     setOpenedModal(false)
   }
@@ -29,8 +25,6 @@ export const HelpLocations = () => {
     setOpenedModal(true)
   }
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
   const { locations } = useFetchHelpLocations()
   const [selectedDistance, setSelectedDistance] = useState(null)
   const navigate = useNavigate()
@@ -67,10 +61,13 @@ export const HelpLocations = () => {
           <LocationCard key={location.id} location={location} />
         ))}
         <ButtonContainer>
-          <Button color="black" onClick={() => navigate('/adicionar-ponto')}>
+          <Button width='100%' color="yellow" onClick={() => navigate('/adicionar-ponto')}>
             Adicionar
           </Button>
         </ButtonContainer>
+        <Link to="/">
+          <Button width='100%' color='black'>VOLTAR</Button>
+        </Link>
       </main>
     </Container>
     <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
