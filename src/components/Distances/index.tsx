@@ -2,7 +2,7 @@ import { Container, Title, Kms } from './styles'
 import { useState } from 'react'
 
 export const Distances = ({ onSelectDistance }: any) => {
-  const [selectedDistance, setSelectedDistance] = useState<number | null>(null)
+  const [selectedDistance, setSelectedDistance] = useState<number | null>(50)
 
   return (
     <Container>
@@ -74,3 +74,4 @@ export const Distances = ({ onSelectDistance }: any) => {
     </Container>
   )
 }
+

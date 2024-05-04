@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useFetchUsers from './useFetchUsers'
 
 import { HeaderAlt } from '../../components/HeaderAlt'
@@ -14,7 +14,7 @@ import { calculateDistance } from '../../utils/calculate'
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
-  const [selectedDistance, setSelectedDistance] = useState(null)
+  const [selectedDistance, setSelectedDistance] = useState(50)
   const { users } = useFetchUsers()
   const { userLocation } = useUserLocation()
 
@@ -42,6 +42,9 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
+  useEffect(() => {
+    filterUsersByDistance(50)
+  }, [])
   return (
     <>
       <Container>
@@ -71,3 +74,4 @@ export const ProvideHelpLocations = () => {
     </>
   )
 }
+
