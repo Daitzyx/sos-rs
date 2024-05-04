@@ -41,7 +41,37 @@ export const LocationsContainer = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  width: 100%;
+  width: 100%;  
   display: flex;
   justify-content: center;
+
+  padding: 10px;
 `
+
+export const ModalContent = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 10px;
+
+    h3, h4{
+      text-align: center;
+    }
+
+    p{
+      text-align: center; 
+      color: ${theme.colors.red};
+      font-weight: ${theme.fontWeight.bold};
+      font-style: italic;
+    }
+
+    button{
+      padding: 5px 20px;
+      background: black;
+      color: white;
+      border-radius: 20px;
+      font-size: ${theme.fontSize.xl};
+    }
+    `

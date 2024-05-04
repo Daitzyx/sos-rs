@@ -11,6 +11,7 @@ export const Card = styled.div`
   padding: 15px;
   gap: 5px;
 
+  cursor: pointer;
 `
 
 export const MapButton = styled.button`
@@ -18,7 +19,6 @@ export const MapButton = styled.button`
   padding: 3px 15px;
   color: white;
   border-radius: 15px;
-
 `
 
 export const Details = styled.div`
@@ -29,21 +29,20 @@ export const Details = styled.div`
   justify-content: center;
 
   padding: 5px;
-
 `
 
 export const Street = styled.p`
   font-Size: 14px;
   font-weight: 700;
-
 `
 
 export const Distance = styled.p`  
   font-size: 12px;
   font-weight: 600;
-
 `
 
 export const Options = styled.button` 
   padding: 2px 5px;
+  
+  cursor: pointer;
 `

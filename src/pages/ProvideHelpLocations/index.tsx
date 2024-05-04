@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useFetchUsers from './useFetchUsers'
+import { Link } from 'react-router-dom'
 
 import { HeaderAlt } from '../../components/HeaderAlt'
 import { Distances } from '../../components/Distances'
@@ -10,6 +11,25 @@ import { Modal } from '../../components/Modal'
 import { Container, Title, ButtonContainer, ModalContent } from './styles'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
+
+function calculateTimeSincePublication(timestamp: string) {
+  const selectedUserTimestamp = new Date(timestamp)
+  const currentTime = new Date()
+
+  const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
+  const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
+  const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
+
+  let timeSincePublicationString
+
+  if (hoursSincePublication > 0) {
+    timeSincePublicationString = `${hoursSincePublication} horas`
+  } else {
+    timeSincePublicationString = `${minutesSincePublication} minutos`
+  }
+
+  return `${timeSincePublicationString}`
+}
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
@@ -42,9 +62,19 @@ export const ProvideHelpLocations = () => {
     setOpenedModal(true)
   }
 
+  /*   filterUsersByDistance(50) */
+
+  // useEffect(() => {
+  //   if (selectedUser) {
+  //     getAddressFromCoordinates(selectedUser.latitude, selectedUser.longitude);
+  //   }
+  // }, [selectedUser, getAddressFromCoordinates]);
+
+  // }, [])
   /* useEffect(() => {
     filterUsersByDistance(50)
   }, []) */
+
   return (
     <>
       <Container>
@@ -65,9 +95,15 @@ export const ProvideHelpLocations = () => {
         {selectedUser && (
           <ModalContent>
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
-            <h3>Rua Abrobrinha, 388</h3>
-            <p>OBS: Registro publicado há 10 minutos.</p>
-            <button onClick={() => {}}>MAPA</button>
+            <h3>{selectedUser.address}</h3>
+            <h4>OBS: {selectedUser.observation}</h4>
+            <p>Registro publicado há {calculateTimeSincePublication(selectedUser.timestamp)}.</p>
+            <Link
+              to={`https://www.google.com/maps/?q=${selectedUser.latitude},${selectedUser.longitude}`}
+              target="_blank"
+            >
+              <button>MAPA</button>
+            </Link>
           </ModalContent>
         )}
       </Modal>

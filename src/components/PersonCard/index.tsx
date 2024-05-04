@@ -1,9 +1,12 @@
-import { Card, Street, Distance, Details, MapButton } from './styles'
+import { useEffect, useState } from 'react'
+
 import { FaCircleUser } from 'react-icons/fa6'
 import { SlOptionsVertical } from 'react-icons/sl'
+
 import useUserLocation from '../../hooks/useUserLocation'
-import { useEffect, useState } from 'react'
 import { calculateDistance } from '../../utils/calculate'
+
+import { Card, Street, Distance, Details, MapButton, Options } from './styles'
 
 export const PersonCard = ({ user, ...props }: any) => {
   const { userLocation, loading, error } = useUserLocation()
@@ -11,7 +14,7 @@ export const PersonCard = ({ user, ...props }: any) => {
 
   const addressParts = user.address
     .split(',')
-    .filter((part) => !part.includes('undefined'))
+    .filter((part: any) => !part.includes('undefined'))
     .slice(0, -1)
   const address = addressParts.join(', ')
   console.log(addressParts, 'addressParts')
@@ -41,7 +44,9 @@ export const PersonCard = ({ user, ...props }: any) => {
       <MapButton as="a" href={mapsUrl} target="_blank">
         MAPA
       </MapButton>
-      <SlOptionsVertical />
+      <Options>
+        <SlOptionsVertical />
+      </Options>
     </Card>
   )
 }

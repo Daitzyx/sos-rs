@@ -44,7 +44,9 @@ export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-`
+
+  padding: 10px;
+  `
 
 export const ModalContent = styled.div`
   display: flex;

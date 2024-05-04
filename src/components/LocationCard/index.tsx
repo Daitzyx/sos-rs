@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Card, Street, Distance, Details, MapButton } from './styles'
 import { BiMapPin } from 'react-icons/bi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
+
+import { Card, Street, Distance, Details, MapButton, Options } from './styles'
 
 const getAddressCoordinates = async (address: any) => {
   try {
@@ -65,7 +66,9 @@ export const LocationCard = ({ location }: any) => {
       <MapButton as="a" href={mapsUrl} target="_blank">
         MAPA
       </MapButton>
-      <SlOptionsVertical />
+      <Options>
+        <SlOptionsVertical />
+      </Options>
     </Card>
   )
 }
