@@ -103,7 +103,7 @@ export const HelpLocations = () => {
       <Modal isOpen={openedModal} onRequestClose={closeModal} contentLabel="Modal">
         {selectedUser && (
           <ModalContent>
-            <h3>A pessoa que precisa de socorro se encontra em:</h3>
+            <h3>Este ponto de ajuda se encontra em:</h3>
             <h3>{selectedUser}</h3>
             <Link to={link} target="_blank">
               <button>MAPA</button>
