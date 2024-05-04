@@ -1,26 +1,10 @@
 import { Container, Description, Form, Info, Title } from './styles'
 import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import useRegisterHelpPoint from './useRegisterHelpPoint'
 
 export const HelpPoints = () => {
-  const [location, setLocation] = useState({
-    name: '',
-    street: '',
-    number: '',
-    district: '',
-    city: ''
-  })
-
-  const [message, setMessage] = useState('')
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-
-  const handleSubmit = () => {
-    setMessage('Cadastrado com sucesso!')
-    navigate('/')
-  }
+  const { location, setLocation, loading, message, error, handleSubmit } = useRegisterHelpPoint()
 
   return (
     <Container>
@@ -71,12 +55,11 @@ export const HelpPoints = () => {
             placeholder="Cidade *"
           />
 
-          <Button width="100%" color="black" disabled={loading} onClick={handleSubmit}>
+          <Button type="submit" width="100%" color="black" disabled={loading}>
             {loading ? 'Salvando...' : 'Cadastrar'}
           </Button>
 
-          {/* {error && <p>Error: {error}</p>} */}
-
+          {error && <Info>{error}</Info>}
           {message && <Info>{message}</Info>}
         </Form>
       </main>
