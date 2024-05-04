@@ -18,6 +18,7 @@ export const AppRoutes = () => {
 
       <Route path="/quero-ajudar-disclaimer" element={<ProvideHelp />} />
       <Route path="/quero-ajudar" element={<ProvideHelpLocations />} />
+      <Route path="/adicionar-ponto" element={<HelpPoints />} />
     </Routes>
   )
 }

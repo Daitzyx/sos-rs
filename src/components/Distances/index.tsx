@@ -1,6 +1,6 @@
 import { Container, Title, Kms } from './styles'
 
-export const Distances = ({ onSelectDistance }) => {
+export const Distances = ({ onSelectDistance }: any) => {
   // Recebe a função de filtragem como propriedade
   return (
     <Container>

@@ -1,4 +1,3 @@
-import { Container, Title, ButtonContainer } from './styles'
 import { HeaderAlt } from '../../components/HeaderAlt'
 import { LocationCard } from '../../components/LocationCard'
 import { Distances } from '../../components/Distances'
@@ -8,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { calculateDistance } from '../../utils/calculate'
 import useUserLocation from '../../hooks/useUserLocation'
+
+import { ButtonContainer, Container, Title } from './styles'
 
 export const HelpLocations = () => {
   const { locations } = useFetchHelpLocations()

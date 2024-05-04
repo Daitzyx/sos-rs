@@ -33,7 +33,7 @@ export const Modal = ({ isOpen, onRequestClose, contentLabel, children }: Props)
   return (
     <ReactModal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel={contentLabel} style={customStyles}>   
       <Details>
-        <CloseButton>
+        <CloseButton onClick={onRequestClose}>
           <IoCloseCircleOutline size={30} />
         </CloseButton>
       </Details>  

@@ -21,4 +21,3 @@ export const LocationCard = ({ location }: any) => {
     </Card>
   )
 }
-
