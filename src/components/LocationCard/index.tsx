@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-=======
 import { useEffect, useState } from 'react'
-import { Card, Street, Distance, Details, MapButton } from './styles'
->>>>>>> 24ac2136063dc2696fbbd2d3d48f0ab6155e9dac
 import { BiMapPin } from 'react-icons/bi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import useUserLocation from '../../hooks/useUserLocation'
