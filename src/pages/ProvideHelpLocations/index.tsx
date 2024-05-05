@@ -60,7 +60,6 @@ export const ProvideHelpLocations = () => {
   }
 
   function openModal(user: any) {
-    console.log(user, 'user')
     setOpenedModal(true)
     const mapsUrl =
       user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
@@ -78,8 +77,6 @@ export const ProvideHelpLocations = () => {
   }
 
   const { nextPage, prevPage, currentItems } = usePagination(filteredUsers, 10)
-
-  console.log(calculateTimeSincePublication(selectedUser))
 
   return (
     <>
