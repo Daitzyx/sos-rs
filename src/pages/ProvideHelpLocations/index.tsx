@@ -86,7 +86,7 @@ export const ProvideHelpLocations = () => {
         <main>
           <Title>Listando pessoas a um raio de {selectedDistance}km de distância</Title>
           <Distances onSelectDistance={filterUsersByDistance} />
-          {filteredUsers.map((user: any) => (
+          {currentItems.map((user: any) => (
             <PersonCard key={user.id} user={user} onClick={() => openModal(user)} />
           ))}
           {loading && <LoadingSpin />}
