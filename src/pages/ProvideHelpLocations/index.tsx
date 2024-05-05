@@ -14,24 +14,24 @@ import { calculateDistance } from '../../utils/calculate'
 import { LoadingSpin } from '../../components/LoadingSpin'
 import usePagination from '../../hooks/usePagination'
 
-// function calculateTimeSincePublication(timestamp: string) {
-//   const selectedUserTimestamp = new Date(timestamp)
-//   const currentTime = new Date()
+function calculateTimeSincePublication(timestamp: string) {
+  const selectedUserTimestamp = new Date(timestamp)
+  const currentTime = new Date()
 
-//   const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
-//   const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
-//   const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
+  const timeDifference = currentTime.getTime() - selectedUserTimestamp.getTime()
+  const minutesSincePublication = Math.floor(timeDifference / (1000 * 60))
+  const hoursSincePublication = Math.floor(timeDifference / (1000 * 60 * 60))
 
-//   let timeSincePublicationString
+  let timeSincePublicationString
 
-//   if (hoursSincePublication > 0) {
-//     timeSincePublicationString = `${hoursSincePublication} horas`
-//   } else {
-//     timeSincePublicationString = `${minutesSincePublication} minutos`
-//   }
+  if (hoursSincePublication > 0) {
+    timeSincePublicationString = `${hoursSincePublication} horas`
+  } else {
+    timeSincePublicationString = `${minutesSincePublication} minutos`
+  }
 
-//   return `${timeSincePublicationString}`
-// }
+  return `${timeSincePublicationString}`
+}
 
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
@@ -65,18 +65,21 @@ export const ProvideHelpLocations = () => {
     const mapsUrl =
       user.latitude && user.longitude && `https://www.google.com/maps/?q=${user.latitude},${user.longitude}`
 
-    const { address, observation } = user
+    const { address, observation, timestamp } = user
     const addressParts = address.split(',').filter((part: any) => part.trim() !== 'undefined')
     const formattedAddress = addressParts.join(', ')
     const selectedUserData = {
       address: formattedAddress,
       observation: observation,
-      mapsUrl
+      mapsUrl,
+      timestamp: timestamp
     }
     setSelectedUser(selectedUserData)
   }
 
   const { nextPage, prevPage, currentItems } = usePagination(filteredUsers, 10)
+
+  console.log(calculateTimeSincePublication(selectedUser))
 
   return (
     <>
@@ -127,6 +130,10 @@ export const ProvideHelpLocations = () => {
             <h3>A pessoa que precisa de socorro se encontra em:</h3>
             <h3>{selectedUser.address}</h3>
             <h4>OBS: {selectedUser.observation}</h4>
+            <p style={{ color: '#e31e24' }}>
+              Solicitação feita há{' '}
+              {selectedUser.timestamp !== 'NaN' && calculateTimeSincePublication(selectedUser.timestamp)}
+            </p>
 
             <Link to={selectedUser.mapsUrl} target="_blank">
               <button>MAPA</button>
