@@ -17,7 +17,7 @@ export const PersonCard = ({ user, ...props }: any) => {
     .filter((part: any) => !part.includes('undefined'))
     .slice(0, -1)
   const address = addressParts.join(', ')
-  console.log(addressParts, 'addressParts')
+
   const [distance, setDistance] = useState<number | null>(null)
 
   useEffect(() => {
@@ -50,4 +50,3 @@ export const PersonCard = ({ user, ...props }: any) => {
     </Card>
   )
 }
-
