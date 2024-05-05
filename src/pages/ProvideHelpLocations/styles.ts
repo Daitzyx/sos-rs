@@ -66,9 +66,13 @@ export const ModalContent = styled.div`
   gap: 30px;
   padding: 10px;
 
+  max-width: 320px;
+
   h3,
   h4 {
     text-align: center;
+    word-wrap: break-word;
+    max-width: 98%;
   }
 
   p {
