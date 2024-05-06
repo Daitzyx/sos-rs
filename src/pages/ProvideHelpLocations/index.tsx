@@ -36,7 +36,7 @@ function calculateTimeSincePublication(timestamp: string) {
 export const ProvideHelpLocations = () => {
   const [openedModal, setOpenedModal] = useState(false)
   const [selectedUser, setSelectedUser] = useState<any>(null)
-  const [selectedDistance, setSelectedDistance] = useState(50)
+  const [selectedDistance, setSelectedDistance] = useState(500)
   const { users } = useFetchUsers()
   const { userLocation, loading } = useUserLocation()
 
