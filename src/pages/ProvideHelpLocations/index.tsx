@@ -43,17 +43,21 @@ export const ProvideHelpLocations = () => {
   const filterUsersByDistance = (distance: any) => {
     setSelectedDistance(distance)
   }
+  const sevenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 7))
 
-  const filteredUsers =
-    selectedDistance && userLocation
-      ? users
-          .map((user: any) => ({
-            ...user,
-            distance: calculateDistance(user.latitude, user.longitude, userLocation.latitude, userLocation.longitude)
-          }))
-          .filter((user: any) => user.distance <= selectedDistance)
-          .sort((a: any, b: any) => a.distance - b.distance)
-      : users
+  const filteredUsers = users
+    .filter((user) => {
+      const userDate = new Date(user.timestamp)
+      return userDate >= sevenDaysAgo
+    })
+    .map((user) => ({
+      ...user,
+      distance: userLocation
+        ? calculateDistance(user.latitude, user.longitude, userLocation.latitude, userLocation.longitude)
+        : null
+    }))
+    .filter((user) => Number(user.distance) <= selectedDistance)
+    .sort((a, b) => Number(a.distance) - Number(b.distance))
 
   function closeModal() {
     setOpenedModal(false)
@@ -92,7 +96,7 @@ export const ProvideHelpLocations = () => {
           {loading && <LoadingSpin />}
 
           {filteredUsers.length === 0 && (
-            <p style={{ textAlign: 'center', padding: '15px' }}>Nada reportado até o momento!</p>
+            <p style={{ textAlign: 'center', padding: '15px' }}>Nada reportado nos últimos 7 dias!</p>
           )}
 
           <PaginateButtons>

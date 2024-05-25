@@ -4,8 +4,16 @@ import { db } from '../../libs/firebase'
 import useUserLocation from '../../hooks/useUserLocation'
 import { calculateDistance } from '../../utils/calculate'
 
+interface Emergencie {
+  address: string
+  latitude: number
+  longitude: number
+  observation: string
+  timestamp: Date
+}
+
 const useFetchUsers = () => {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState<Emergencie[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const { userLocation } = useUserLocation()
@@ -16,16 +24,16 @@ const useFetchUsers = () => {
       usersRef,
       (snapshot) => {
         const data = snapshot.val()
-        const loadedUsers: any = []
+        const loadedUsers: Emergencie[] = []
         for (const key in data) {
-          const user = {
+          const user: Emergencie = {
             id: key,
             ...data[key],
             distance: calculateDistance(
               data[key].latitude,
               data[key].longitude,
-              userLocation?.latitude,
-              userLocation?.longitude
+              userLocation?.latitude as number,
+              userLocation?.longitude as number
             )
           }
           loadedUsers.push(user)
