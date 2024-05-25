@@ -34,8 +34,8 @@ const useFetchHelpLocations = () => {
             distance: calculateDistance(
               data[key].latitude,
               data[key].longitude,
-              userLocation?.latitude,
-              userLocation?.longitude
+              Number(userLocation?.latitude),
+              Number(userLocation?.longitude)
             )
           }
           loadedLocations.push(location)
