@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app'
 import { getDatabase } from 'firebase/database'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCLvGan7WZoHZ6s6fbEUUlHCq7uW9BaVAU',
-  authDomain: 'sos-rs.firebaseapp.com',
-  projectId: 'sos-rs',
-  storageBucket: 'sos-rs.appspot.com',
-  messagingSenderId: '100834238131',
-  appId: '1:100834238131:web:8450ca091d879bfcd81ac6',
-  measurementId: 'G-DL0XMP2121'
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 }
 
 const app = initializeApp(firebaseConfig)
